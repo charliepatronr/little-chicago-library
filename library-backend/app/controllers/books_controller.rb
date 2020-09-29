@@ -91,14 +91,4 @@ class BooksController < ApplicationController
 
     end
 
-    # def destroy
-    #     book = Book.find(params[:books]['id'])
-    #     adopted = !book.adopted
-    #     if book.update(adopted: adopted)
-    #         render json: BookSerializer.new(book).to_serialized_json
-    #     else 
-    #         render json: {message: 'Book could not be adopted :('}
-    #     end
-    # end
-
 end
