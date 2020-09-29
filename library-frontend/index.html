@@ -1,19 +1,92 @@
 <!DOCTYPE html>
-<html lang="en" dir="ltr">
-  <head>
-    <meta charset="utf-8">
-    <title>Ravenswood Library</title>
-    <link rel="stylesheet" href="styles.css">
-  </head>
-  <body>
-    <header>
-      <h2>Catalog</h2>
-    </header>
+<html lang="en">
 
-    <main id='main'>
-      
-    </main>
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Little Libraries</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
 
-    <script src="./src/index.js" defer></script>
-  </body>
+        #map {
+            border: 2px solid #333;
+            width: 80vw;
+            height: 80vh;
+        }
+    </style>
+</head>
+
+<body>
+    <button id='toggle-map-catalog'>Show Catalog</button>
+
+    <div id='library-catalog' style="display:none;" >
+        <div class="card" data-id="$1}"><p>Card</p>
+            <img src='https://images-na.ssl-images-amazon.com/images/I/81dj-KUDWUL.jpg' style='width: 300px'><img>
+            <button class="add-new-pokemon" data-trainer-id="$1}">Add Pokemon</button>
+        </div>
+
+        <div class="product-thumbnail col-xs-6 col-sm-2 " data-product-id="56759" data-product-sku="118721 B" data-product-name="Amber (Robin Watkins and Nina Canell)" data-product-category="Product/Books/Artists' Books" data-product-brand="Shahrzad Kamel" data-product-price="75.0">
+
+            <a class="product-link" data-lightbox-url="/catalog/56759/lightbox" href="/catalog/56759">
+              <div class="product-image product-thumbnail__product-image">
+                <div class="image-wrapper">
+                  <div class="image-inner product-thumbnail__image-inner">
+                    <img src="https://cdn.filepicker.io/api/file/QNjGb2j7S32Nj4Il8ddf/convert?fit=max&amp;h=480&amp;w=304&amp;compress=true&amp;fit=max" alt="Amber">
+                  </div>
+                </div>
+              </div>
+              <div class="product-text">
+                <div class="credit">
+                  Robin Watkins and Nina Canell
+                </div>
+                <div class="title">
+                  Amber
+                </div>
+                
+                  <span class="categorization">
+                    Books
+                    <br>
+                    $75.00
+                  </span>
+                  <br>
+                <span class="badge badge-yellow badge-type--recent-arrival highlighted-badge">Recent Arrival</span>
+              </div>
+            </a>
+      </div>
+    </div>
+    
+    <div id="map-container">
+        <div id="map">
+        </div>
+        <script src="./keys.js"></script>
+        <script>
+            let map;
+            document.addEventListener("DOMContentLoaded", () => {
+                let s = document.createElement("script");
+                document.head.appendChild(s);
+                s.addEventListener("load", () => {
+                    map = new google.maps.Map(document.getElementById("map"), {
+                        center: {
+                            lat: 41.881832,
+                            lng: -87.623177
+                        },
+                        zoom: 13,
+                        mapTypeId: google.maps.MapTypeId.ROADMAP
+                    });
+                });
+                s.src = `https://maps.googleapis.com/maps/api/js?key=AIzaSyAiy-SqHc3GkmaJ9uQ4VFymuK90SfRG46w`;
+            });
+        </script>
+
+    </div>
+
+  
+</body>
+    <script src='./src/index.js' defer></script>
 </html>
