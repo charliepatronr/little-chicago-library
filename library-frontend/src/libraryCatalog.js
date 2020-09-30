@@ -72,7 +72,7 @@ const addClickListener = () => {
 //fetch requests
 
 const fetchCatalogLibrary = () => {
-    fetch(LIBRARIES_URL+'/29')
+    fetch(LIBRARIES_URL+'/51')
     .then(response => response.json())
     .then(response => { 
         renderIndivCatalog(response);
@@ -112,7 +112,6 @@ const fetchEntireCatalog = () => {
               </div>`
             });
         })
-        debugger
         bookCatalogRow.innerHTML = bookCards
         // renderIndivCatalog(response);
         // addListeners();

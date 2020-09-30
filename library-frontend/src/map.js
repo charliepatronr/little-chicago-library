@@ -5,31 +5,46 @@ const LIBRARIES_URL = `${BASE_URL}/libraries`
 
 
 let map;
-let librariesInfo;
+let libraryArr = []
+let libObj = []
+let obj
 function initMap() {
-    
 
     fetch(LIBRARIES_URL)
     .then(response => response.json())
     .then(response => { 
-        mapMarker(response)
-        // Object.assign(librariesInfo, response)
-        // librariesInfo = [...response]
-        librariesInfo = JSON.stringify(response)
+        libraryInfo(response)
     });
 
-    const mapMarker = () => {
-        
+    const libraryInfo = (libraries) => {
+        let obj
+        for(let element in libraries){
+            const {id, lat, location, long, name} = libraries[element]
+            obj = {
+                id: id, 
+                name: name,
+                lat: lat, 
+                long: long, 
+                location: location,
+                // img_url: img_url
+            }
+            libObj.push(obj)
+        }
+        for (let i = 0; i < libObj.length; ++i) {
+            const marker = new google.maps.Marker({
+              position: {
+                lat: libObj[i].lat,
+                lng: libObj[i].long,
+              },
+              map: map,
+              libraryId: libObj[i].id,
+              libraryName: libObj[i].name, 
+              location: libObj[i].location
+            //   imgUrl: libObj[i].img_url
+            });
+            addClickListeners(marker);
+          }
     }
-
-    console.log(librariesInfo)
-    for(let element in librariesInfo){
-        console.log(element)
-    }
-
-
-    const libraries = [{lat:41.96819 , long:-87.67666 }, {lat:41.97013 , long:-87.67136}, {lat:41.97587 , long:-87.67134}, {lat:41.98189 , long:-87.67109}, {lat:41.979329 , long:-87.66644
-    }, {lat:41.97776 , long:-87.66443}, {lat:41.97721 , long:-87.6639}, {lat:41.97602 , long:-87.65759}]
 
     map = new google.maps.Map(document.getElementById("map"), {
             center: {
@@ -41,28 +56,21 @@ function initMap() {
     });
 
 
-  for (let i = 0; i < libraries.length; ++i) {
-    const marker = new google.maps.Marker({
-      position: {
-        lat: libraries[i].lat,
-        lng: libraries[i].long,
-      },
-      map: map,
-      library_id: 1
-    });
-    addClickListeners(marker);
-  }
+ 
 
   function addClickListeners(marker){
       
     const infowindow = new google.maps.InfoWindow({
-        content: 'secretMessage',
+        content: `Little Library name: ${marker.libraryName}
+        Location: ${marker.location}` 
+        ,
       });
+      
       marker.addListener("click", () => {
         infowindow.open(marker.get("map"), marker);
       })
       marker.addListener('dblclick', ()=>{
-          console.log(marker.library_id)
+          console.log(marker.libraryId)
       });
   }
 
