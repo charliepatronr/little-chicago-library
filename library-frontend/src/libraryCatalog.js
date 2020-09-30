@@ -13,7 +13,6 @@ const landingPageListeners = () => {
         if( e.target.className.split(' ')[3] ==='toggle-map-catalog'){
             mapContainer.style.display = "none";
             individuaLibraryCatalog.style.display ='none'
-            landingButtons.style.display ='none'
             allLibrariesCatalog.style.display = "block";
             fetchEntireCatalog()
             addClickListener()
@@ -21,7 +20,6 @@ const landingPageListeners = () => {
         else if (e.target.className ==='toggle-map-individual-library') {
             mapContainer.style.display = "none";
             allLibrariesCatalog.style.display = "none";
-            landingButtons.style.display ='none'
             individuaLibraryCatalog.style.display ='block'
             //have to put fetch library here because the library we are fetching is dependant on 
             //the library the user clicks which each time fetches a library with certain id
@@ -74,7 +72,7 @@ const addClickListener = () => {
 //fetch requests
 
 const fetchCatalogLibrary = () => {
-    fetch(LIBRARIES_URL+'/29')
+    fetch(LIBRARIES_URL+'/51')
     .then(response => response.json())
     .then(response => { 
         renderIndivCatalog(response);
@@ -114,7 +112,6 @@ const fetchEntireCatalog = () => {
               </div>`
             });
         })
-        debugger
         bookCatalogRow.innerHTML = bookCards
         // renderIndivCatalog(response);
         // addListeners();
