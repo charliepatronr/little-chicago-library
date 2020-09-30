@@ -11,11 +11,17 @@ function initMap() {
 
     fetch(LIBRARIES_URL)
     .then(response => response.json())
-    .then(response => {
+    .then(response => { 
+        mapMarker(response)
         // Object.assign(librariesInfo, response)
         // librariesInfo = [...response]
         librariesInfo = JSON.stringify(response)
     });
+
+    const mapMarker = () => {
+        
+    }
+
     console.log(librariesInfo)
     for(let element in librariesInfo){
         console.log(element)

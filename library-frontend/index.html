@@ -192,25 +192,6 @@
 
       <div id="map">
       </div>
-      <script>
-        let map;
-        document.addEventListener("DOMContentLoaded", () => {
-          let s = document.createElement("script");
-          document.head.appendChild(s);
-          s.addEventListener("load", () => {
-            map = new google.maps.Map(document.getElementById("map"), {
-              center: {
-                lat: 41.881832,
-                lng: -87.623177
-              },
-              zoom: 13,
-              mapTypeId: google.maps.MapTypeId.ROADMAP
-            });
-          });
-          s.src = `https://maps.googleapis.com/maps/api/js?key=`;
-        });
-        </script>
-
     </div>
 
 
@@ -241,4 +222,6 @@
 <!-- place this script tag inside body or head tags? -->
     <script src='./src/index.js' defer></script>
     <script src='./src/libraryCatalog.js' defer></script>
+    <script src= "https://maps.googleapis.com/maps/api/js?key=AIzaSyAiy-SqHc3GkmaJ9uQ4VFymuK90SfRG46w&callback=initMap&libraries=&v=weekly" defer></script>
+    <script src= './src/map.js'></script>
 </html>
