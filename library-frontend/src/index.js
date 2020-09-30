@@ -6,7 +6,6 @@ const renderCatalog = () => {
     let mapToggle = true 
     let button = document.querySelector('#toggle-map-catalog');
     let libraryCatalog = document.querySelector('#library-catalog')
-    console.log(button)
     let mapContainer = document.querySelector('#map-container')
     button.addEventListener('click', () => {
         mapToggle = !mapToggle
