@@ -1,8 +1,5 @@
-main {
-    display: grid;
-    grid-template-columns: 1fr;
-    grid-template-rows: auto;
-    grid-gap: 20px;
-    padding-top: 10px;
-    padding-bottom: 30px;
-  }
+#map {
+  border: 2px solid #333;
+  width: 80vw;
+  height: 80vh;
+}

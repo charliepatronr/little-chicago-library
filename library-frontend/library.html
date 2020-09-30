@@ -7,15 +7,51 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <title>Little Libraries</title>
 </head>
+<style>
+    #map {
+        border: 2px solid #333;
+        width: 80vw;
+        height: 80vh;
+    }
+</style>
+<body id='body'>
 
-<body>
-    <div id='main'>
-        <div class='library-catalog' style="display:block;" >
-            <div class="product-thumbnail col-xs-6 col-sm-2 " data-product-id="56759" data-product-sku="118721 B" data-product-name="Amber (Robin Watkins and Nina Canell)" data-product-category="Product/Books/Artists' Books" data-product-brand="Shahrzad Kamel" data-product-price="75.0">
+    <div class= "landing-page-buttons">   
+        <button class='toggle-map-catalog'>Show Catalog</button>
+        <button class='toggle-map-individual-library' data-id ="29">Show Individual Library</button>
+    </div>
 
+    <div id="map-container" style = "display: block;">
 
-            </div>
+        <script src= "https://maps.googleapis.com/maps/api/js?key=AIzaSyAiy-SqHc3GkmaJ9uQ4VFymuK90SfRG46w&callback=initMap&libraries=&v=weekly" defer></script>
+        <script src= './src/map.js'></script>
+        <div id="map">
         </div>
+
+    </div>
+
+
+    <div id='main-individual-library' style = "display: none;" >
+
+        <div class= "button-wrapper">
+        </div>
+       
+
+        <div class= "library-info-container">
+
+        </div>
+        
+        <div class='individual-library-catalog' >
+        </div>
+
+
+    </div>
+
+    <div class='libraries-catalog'  style = "display: none;">
+
+        <h1>ENTIRE LIBRARIES COLLECTION</h1>
+
+
     </div>
 
 </body>
