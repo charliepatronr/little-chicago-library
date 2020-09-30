@@ -9,11 +9,14 @@ const mapContainer = document.querySelector('#map-container')
 
 const landingPageListeners = () => {
     landingButtons.addEventListener('click', (e)=> {
-        if(e.target.className ==='toggle-map-catalog'){
+        //refactor to use include 
+        if( e.target.className.split(' ')[3] ==='toggle-map-catalog'){
             mapContainer.style.display = "none";
             individuaLibraryCatalog.style.display ='none'
             landingButtons.style.display ='none'
             allLibrariesCatalog.style.display = "block";
+            fetchEntireCatalog()
+            addClickListener()
         }
         else if (e.target.className ==='toggle-map-individual-library') {
             mapContainer.style.display = "none";
@@ -55,6 +58,17 @@ const addListeners = () => {
     });
 }
 
+const addClickListener = () => {
+  let myModal = new bootstrap.Modal(document.getElementById('exampleModal'), {
+    keyboard: false
+  })
+  const libraryCatalog = document.querySelector('#library-catalog')
+  libraryCatalog.addEventListener('click', e => {
+  console.log(e.target);
+  myModal.toggle()
+  })
+}
+
 
 
 //fetch requests
@@ -71,10 +85,37 @@ const fetchCatalogLibrary = () => {
 }
 
 
-const fecthEntireCatalog = () => {
+const fetchEntireCatalog = () => {
+    const bookCatalogRow = document.getElementById('book-catalog-row')
+    console.log(bookCatalogRow)
     fetch(LIBRARIES_URL)
     .then(response => response.json())
     .then(response => { 
+        let bookCards = ''
+        response.forEach(library => {
+            library.books.forEach(book => {
+                bookCards += 
+                `<div class="col-6 col-sm-6 col-md-2">
+                <!-- <a href=""> -->
+                <div class="book-card" data-id= ${book.id}>
+                  <div class="book-cover">
+                    <img src='${book.img_url}' style='width: 152px'><img>
+                  </div>
+                  <div class="book-text-info">
+                    <div class="author">
+                     ${book.author}
+                    </div>
+                    <div class="title">
+                      ${book.title}
+                    </div>
+                  </div>
+                </div>
+                <!-- </a> -->
+              </div>`
+            });
+        })
+        debugger
+        bookCatalogRow.innerHTML = bookCards
         // renderIndivCatalog(response);
         // addListeners();
     });
@@ -195,7 +236,7 @@ const adoptBook = (e) => {
 
 const main = () =>{
     landingPageListeners()
-    fecthEntireCatalog()
+    fetchEntireCatalog()
     
 }
 
