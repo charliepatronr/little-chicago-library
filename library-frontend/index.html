@@ -1,11 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <title>Little Libraries</title>
+    <!-- <link rel="stylesheet" href="css/bootstrap.css"> -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
     <style>
         body {
             display: flex;
@@ -13,7 +14,6 @@
             align-items: center;
             min-height: 100vh;
         }
-
         #map {
             border: 2px solid #333;
             width: 80vw;
@@ -21,50 +21,122 @@
         }
     </style>
 </head>
-
 <body>
-    <button id='toggle-map-catalog'>Show Catalog</button>
-
-    <div id='library-catalog' style="display:none;" >
-        <div class="card" data-id="$1}"><p>Card</p>
-            <img src='https://images-na.ssl-images-amazon.com/images/I/81dj-KUDWUL.jpg' style='width: 300px'><img>
-            <button class="add-new-pokemon" data-trainer-id="$1}">Add Pokemon</button>
+  <div class="container-fluid">
+    <button id='toggle-map-catalog'>ALL BOOKS</button>
+    <div class="container" id="library-catalog" style="display:none;">
+      <div class="row">
+        <div class="col-6 col-sm-6 col-md-2">
+          <a href="">
+            <div class="book-cover">
+              <img src='https://images-na.ssl-images-amazon.com/images/I/81dj-KUDWUL.jpg' style='width: 100px'><img>
+            </div>
+            <div class="book-text-info">
+              <div class="author">
+                Robin Watkins and Nina Canell
+              </div>
+              <div class="title">
+                Amber
+              </div>
+            </div>
+          </a>
         </div>
-
-        <div class="product-thumbnail col-xs-6 col-sm-2 " data-product-id="56759" data-product-sku="118721 B" data-product-name="Amber (Robin Watkins and Nina Canell)" data-product-category="Product/Books/Artists' Books" data-product-brand="Shahrzad Kamel" data-product-price="75.0">
-
-            <a class="product-link" data-lightbox-url="/catalog/56759/lightbox" href="/catalog/56759">
-              <div class="product-image product-thumbnail__product-image">
-                <div class="image-wrapper">
-                  <div class="image-inner product-thumbnail__image-inner">
-                    <img src="https://cdn.filepicker.io/api/file/QNjGb2j7S32Nj4Il8ddf/convert?fit=max&amp;h=480&amp;w=304&amp;compress=true&amp;fit=max" alt="Amber">
-                  </div>
-                </div>
+        <div class="col-6 col-sm-6 col-md-2">
+          <a href="">
+            <div class="book-cover">
+              <img src='https://images-na.ssl-images-amazon.com/images/I/81dj-KUDWUL.jpg' style='width: 100px'><img>
+            </div>
+            <div class="book-text-info">
+              <div class="author">
+                Robin Watkins and Nina Canell
               </div>
-              <div class="product-text">
-                <div class="credit">
-                  Robin Watkins and Nina Canell
-                </div>
-                <div class="title">
-                  Amber
-                </div>
-                
-                  <span class="categorization">
-                    Books
-                    <br>
-                    $75.00
-                  </span>
-                  <br>
-                <span class="badge badge-yellow badge-type--recent-arrival highlighted-badge">Recent Arrival</span>
+              <div class="title">
+                Amber
               </div>
-            </a>
+            </div>
+          </a>
+        </div>
+        <div class="col-6 col-sm-6 col-md-2">
+          <a href="">
+            <div class="book-cover">
+              <img src='https://images-na.ssl-images-amazon.com/images/I/81dj-KUDWUL.jpg' style='width: 100px'><img>
+            </div>
+            <div class="book-text-info">
+              <div class="author">
+                Robin Watkins and Nina Canell
+              </div>
+              <div class="title">
+                Amber
+              </div>
+            </div>
+          </a>
+        </div>      
+        <div class="col-6 col-sm-6 col-md-2">
+          <a href="">
+            <div class="book-cover">
+              <img src='https://images-na.ssl-images-amazon.com/images/I/81dj-KUDWUL.jpg' style='width: 100px'><img>
+            </div>
+            <div class="book-text-info">
+              <div class="author">
+                Robin Watkins and Nina Canell
+              </div>
+              <div class="title">
+                Amber
+              </div>
+            </div>
+          </a>
+        </div>      
+        <div class="col-6 col-sm-6 col-md-2">
+          <a href="">
+            <div class="book-cover">
+              <img src='https://images-na.ssl-images-amazon.com/images/I/81dj-KUDWUL.jpg' style='width: 100px'><img>
+            </div>
+            <div class="book-text-info">
+              <div class="author">
+                Robin Watkins and Nina Canell
+              </div>
+              <div class="title">
+                Amber
+              </div>
+            </div>
+          </a>
+        </div>      
+        <div class="col-6 col-sm-6 col-md-2">
+          <a href="">
+            <div class="book-cover">
+              <img src='https://images-na.ssl-images-amazon.com/images/I/81dj-KUDWUL.jpg' style='width: 100px'><img>
+            </div>
+            <div class="book-text-info">
+              <div class="author">
+                Robin Watkins and Nina Canell
+              </div>
+              <div class="title">
+                Amber
+              </div>
+            </div>
+          </a>
+        </div>      
+        <div class="col-6 col-sm-6 col-md-2">
+          <a href="">
+            <div class="book-cover">
+              <img src='https://images-na.ssl-images-amazon.com/images/I/81dj-KUDWUL.jpg' style='width: 100px'><img>
+            </div>
+            <div class="book-text-info">
+              <div class="author">
+                Robin Watkins and Nina Canell
+              </div>
+              <div class="title">
+                Amber
+              </div>
+            </div>
+          </a>
+        </div>
       </div>
     </div>
-    
+  </div>
     <div id="map-container">
         <div id="map">
         </div>
-        <script src="./keys.js"></script>
         <script>
             let map;
             document.addEventListener("DOMContentLoaded", () => {
@@ -83,10 +155,12 @@
                 s.src = `https://maps.googleapis.com/maps/api/js?key=`;
             });
         </script>
-
     </div>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous" defer></script>
+    <!-- <script src="js/bootstrap.js" defer></script> -->
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha2/js/bootstrap.bundle.min.js" integrity="sha384-BOsAfwzjNJHrJ8cZidOg56tcQWfp6y72vEJ8xQ9w6Quywb24iOsW913URv1IS4GD" crossorigin="anonymous" defer></script>
 
-  
 </body>
+<!-- place this script tag inside body or head tags? -->
     <script src='./src/index.js' defer></script>
 </html>
