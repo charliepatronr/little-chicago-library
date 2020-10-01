@@ -15,26 +15,26 @@ const landingPageListeners = () => {
             individuaLibraryCatalog.style.display ='none'
             allLibrariesCatalog.style.display = "block";
             fetchEntireCatalog()
-            addClickListener()
+            addModalListeners()
         }
-        else if (e.target.className ==='toggle-map-individual-library') {
-            mapContainer.style.display = "none";
-            allLibrariesCatalog.style.display = "none";
-            individuaLibraryCatalog.style.display ='block'
-            //have to put fetch library here because the library we are fetching is dependant on 
-            //the library the user clicks which each time fetches a library with certain id
-            // however this causes buttons and images console.log to increase every time
-            fetchCatalogLibrary()
-        }
+        // else if (e.target.className ==='toggle-map-individual-library') {
+        //     mapContainer.style.display = "none";
+        //     allLibrariesCatalog.style.display = "none";
+        //     individuaLibraryCatalog.style.display ='block'
+        //     //have to put fetch library here because the library we are fetching is dependant on 
+        //     //the library the user clicks which each time fetches a library with certain id
+        //     // however this causes buttons and images console.log to increase every time
+        //     fetchCatalogLibrary()
+        // }
     });
 }
+
 
 
 const addListeners = () => {
     let container = document.getElementById('main-individual-library')
     container.addEventListener('click', (e) => {
         if(e.target.className == 'image-link'){
-            console.log(e.target)
             productModal(e)
         }
         else if (e.target.className ==='library'){
@@ -56,7 +56,7 @@ const addListeners = () => {
     });
 }
 
-const addClickListener = () => {
+const addModalListeners = () => {
   let myModal = new bootstrap.Modal(document.getElementById('exampleModal'), {
     keyboard: false
   })
@@ -71,8 +71,8 @@ const addClickListener = () => {
 
 //fetch requests
 
-const fetchCatalogLibrary = () => {
-    fetch(LIBRARIES_URL+'/51')
+const fetchCatalogLibrary = (libraryId) => {
+    fetch(LIBRARIES_URL+`/${libraryId}`)
     .then(response => response.json())
     .then(response => { 
         renderIndivCatalog(response);
@@ -85,7 +85,6 @@ const fetchCatalogLibrary = () => {
 
 const fetchEntireCatalog = () => {
     const bookCatalogRow = document.getElementById('book-catalog-row')
-    console.log(bookCatalogRow)
     fetch(LIBRARIES_URL)
     .then(response => response.json())
     .then(response => { 
@@ -124,8 +123,15 @@ const fetchEntireCatalog = () => {
 
 
 //rendering
+
+const googleMapsRendering = (libraryId) => {
+    mapContainer.style.display = "none";
+    allLibrariesCatalog.style.display = "none";
+    individuaLibraryCatalog.style.display ='block'
+    fetchCatalogLibrary(libraryId)    
+
+}
 const renderLibraryInfo = (library) => {
-    console.log(library)
     let libInfo = document.querySelector(".library-info-container")
     let libDiv =
     `<div class= "library-information" data-id= "${library.id}">
@@ -143,34 +149,33 @@ const renderLibraryInfo = (library) => {
 }
 
 const renderIndivCatalog = (library) => {
-    let catalogContainer = document.querySelector('.individual-library-catalog')
+    let catalogContainer = document.getElementById('ind-book-catalog-row')
+    console.log(catalogContainer)
     let catalog = ''
     library.books.forEach(book => {
         let bookLog = library.book_logs.find(element => element.book_id === book.id)
        catalog += `
-        <div class="product-link">
-            <div class="image-wrapper">
-                <div class="image-inner product-thumbnail__image-inner">
-                    <img class= 'image-link' src="${book.img_url}" alt="book image" style ="width: 100px;">
-                </div>
+    <div class="col-6 col-sm-6 col-md-2">
+        <div class="book-card" data-id= ${book.id}>
+            <div class="book-cover">
+                <img src='${book.img_url}' class='image-link'style='width: 152px'><img>
             </div>
-            <div class="product-text">
-                <div class="credit">
-                ${book.author}
+            <div class="book-text-info">
+                <div class="author">
+                    ${book.author}
                 </div>
                 <div class="title">
-                ${book.title}
+                    ${book.title}
+                    ${bookLog.available}
                 </div>
-                <span class="genre">
-                    ${book.genre}
-                    <br>
-                </span>
-                <br>
-                <span class="badge badge-yellow badge-type--recent-arrival highlighted-badge">Available? ${bookLog.available}</span>
             </div>
-        </div>`
+        </div>
+    </div>`
     });
+    
     catalogContainer.innerHTML = catalog
+    debugger
+    console.log(catalogContainer)
 }
 
 
