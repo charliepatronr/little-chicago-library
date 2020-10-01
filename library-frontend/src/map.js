@@ -70,7 +70,7 @@ function initMap() {
         infowindow.open(marker.get("map"), marker);
       })
       marker.addListener('dblclick', ()=>{
-          console.log(marker.libraryId)
+        googleMapsRendering(marker.libraryId)
       });
   }
 
