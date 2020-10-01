@@ -3,6 +3,13 @@ const landingButtons = document.querySelector(".landing-page-buttons")
 const allLibrariesCatalog = document.querySelector('.libraries-catalog')
 const individuaLibraryCatalog = document.getElementById('main-individual-library')
 const mapContainer = document.querySelector('#map-container')
+const completelibraryCatalog = document.querySelector('#library-catalog')
+let myModal = new bootstrap.Modal(document.getElementById('exampleModal'), {
+    keyboard: false
+    })
+const modal = document.getElementById('modal-dialog')
+
+
 
 // listeners 
 
@@ -15,7 +22,7 @@ const landingPageListeners = () => {
             individuaLibraryCatalog.style.display ='none'
             allLibrariesCatalog.style.display = "block";
             fetchEntireCatalog()
-            addModalListeners()
+            completelibraryListeners()
         }
         // else if (e.target.className ==='toggle-map-individual-library') {
         //     mapContainer.style.display = "none";
@@ -52,19 +59,35 @@ const addListeners = () => {
         else if (e.target.className === 'adopt-book'){
             adoptBook(e)
         }
+        else if (e.target.className === 'adopt-book'){
+            adoptBook(e)
+        }
         
     });
 }
 
-const addModalListeners = () => {
-  let myModal = new bootstrap.Modal(document.getElementById('exampleModal'), {
-    keyboard: false
-  })
-  const libraryCatalog = document.querySelector('#library-catalog')
-  libraryCatalog.addEventListener('click', e => {
-  console.log(e.target);
-  myModal.toggle()
-  })
+const completelibraryListeners = () => {
+  completelibraryCatalog.addEventListener('click', e => {
+    if(e.target.className === 'image-link'){
+        productModal(e)
+    }
+  });
+}
+
+const modalListeners = () => {
+    //AMOUNT OF MODAL LISTENERS INCREMENT EACH TIME I ACCESS A MODAL, WHERE CAN I ADD THE MODALS INSTEAD???
+
+    modal.addEventListener('click', (e) =>{
+        if (e.target.className.includes('check-out-book') ){
+            checkOutBook(e)
+        }
+        else if (e.target.className.includes('adopt-book') ){
+            adoptBook(e)
+        }
+        else if (e.target.className.includes('edit-book') ){
+            editBook(e)
+        }
+    });
 }
 
 
@@ -96,7 +119,7 @@ const fetchEntireCatalog = () => {
                 <!-- <a href=""> -->
                 <div class="book-card" data-id= ${book.id}>
                   <div class="book-cover">
-                    <img src='${book.img_url}' style='width: 152px'><img>
+                    <img class="image-link" src='${book.img_url}' style='width: 152px'><img>
                   </div>
                   <div class="book-text-info">
                     <div class="author">
@@ -131,6 +154,16 @@ const googleMapsRendering = (libraryId) => {
     fetchCatalogLibrary(libraryId)    
 
 }
+
+
+const renderMap = (e) => {
+    mapContainer.style.display = "block";
+    landingButtons.style.display ='block'
+    individuaLibraryCatalog.style.display ='none'
+    allLibrariesCatalog.style.display = "none";
+    console.log(e.target)  
+}
+
 const renderLibraryInfo = (library) => {
     let libInfo = document.querySelector(".library-info-container")
     let libDiv =
@@ -172,10 +205,7 @@ const renderIndivCatalog = (library) => {
         </div>
     </div>`
     });
-    
     catalogContainer.innerHTML = catalog
-    debugger
-    console.log(catalogContainer)
 }
 
 
@@ -192,11 +222,53 @@ const renderButtons = (library) => {
     buttonWrapper.innerHTML = buttons
 }
 
+const customizeModal = (e, bookId) =>{
+    console.log(e.target)
+    fetch(BOOKS_URL+`/${bookId}`)
+    .then(response => response.json())
+    .then(book => {
+        let modalContent = 
+        `<div class="modal-content">
+        <div class="modal-header">
+          <div class="col-6">
+            <h5 class="modal-title" id="exampleModalLabel">${book.title}</h5>
+            <h5 class="modal-author" id="exampleModalLabel">${book.author}</h5>
+          </div>
+          <div class="col-6">
+            <button type="button" class="btn-close d-block d-sm-block d-md-none float-right" data-dismiss="modal" aria-label="Close"></button>
+          </div>
+        </div>
+        <div class="modal-body text-center">
+          <img class="img-fluid" src='${book.img_url}' style='width: 300px'><img>
+          <br><br>
+          <p>“${book.description}”</p>
+        </div>
+        <div class="modal-footer text-center">
+          <div class="col-12">
+            <button type="button" class="btn btn-primary adopt-book" data-id="${book.id}">ADOPT</button>
+          </div>
+          <div class="col-12">
+            <button type="button" class="btn btn-primary check-out-book" data-id="${book.id}">CHECK OUT</button>
+          </div>
+          <div class="col-12">
+            <button type="button" class="btn btn-primary edit-book" data-id="${book.id}">EDIT</button>
+          </div>
+        </div>
+      </div>`
+        modal.innerHTML = modalContent
+        myModal.toggle()
+        modalListeners()
+    });
+
+}
+
 //NAVIGATION BETWEEN PAGES 
 
 
 const productModal = (e) => {
-    console.log(e.target)
+    let bookId = e.target.parentElement.parentElement.dataset.id
+    customizeModal(e, bookId)
+ 
 }
 
 
@@ -205,20 +277,9 @@ const libraryInfo = (e) => {
 
 }
 
-const renderMap = (e) => {
-    mapContainer.style.display = "block";
-    landingButtons.style.display ='block'
-    individuaLibraryCatalog.style.display ='none'
-    allLibrariesCatalog.style.display = "none";
-    console.log(e.target)
-
-}
-
-
-
-
 
 //book actions
+
 // EVERY TIME I GO FROM THE MAP PAGE TO THE LIBRARY THE BUTTONS CONSOLE LOG MULTIPLIES WHY? IS IT BECAUSE OF EVENT LISTENERS???
 const donateBook = (e) => {
     console.log(e.target, 'entered event')
@@ -233,13 +294,64 @@ const returnBook = (e) => {
 const adoptBook = (e) => {
     console.log(e.target, 'entered event')
 }
+
+const checkOutBook = e => {
+    console.log(e.target, 'entered event')
+}
+const editBook = e => {
+    let bookId = e.target.dataset.id
+    fetch(BOOKS_URL+`/${bookId}`)
+    .then(response => response.json())
+    .then(book => {
+    let modalContent = 
+    ` <div class="modal-content">
+    <div class="modal-header">
+      <div class="col-6">
+        <h5 class="modal-title">Edit Book Info</h5>
+      </div>
+      <div class="col-6">
+        <button type="button" class="btn-close d-block d-sm-block d-md-none float-right" data-dismiss="modal" aria-label="Close"></button>
+      </div>
+    </div>
+    <div class="modal-body text-center">
+    <!-- FORM BEGINS HERE -->
+      <div class="mb-3">
+        <label for="title" class="form-label">Book Title</label>
+        <input type="text" class="form-control" id="title" value="${book.title}">
+      </div>
+      <div class="mb-3">
+        <label for="author" class="form-label">Author</label>
+        <input type="text" class="form-control" id="author" value="${book.author}">
+      </div>
+      <div class="mb-3">
+        <label for="genre" class="form-label">Genre</label>
+        <input type="text" class="form-control" id="genre" placeholder="Genre" value="${book.genre}">
+      </div>
+      <div class="mb-3">
+        <label for="img_url" class="form-label">img_url</label>
+        <input type="text" class="form-control" id="img_url" value="${book.img_url}">
+      </div>
+      <div class="mb-3">
+        <label for="description" class="form-label">Thoughts on this book?</label>
+        <textarea class="form-control" id="description" placeholder="About this Book" rows="3"> ${book.description}</textarea>
+      </div>
+      <!-- FORM ENDS HERE -->
+    </div>
+    <div class="modal-footer text-center">
+      <button type="button" class="btn btn-primary" data-id=${book.id}>SAVE</button>
+    </div>
+  </div>`
+  modal.innerHTML = modalContent
+    
+    });
+}
         
 
 
 const main = () =>{
     landingPageListeners()
     fetchEntireCatalog()
-    
+
 }
 
 
