@@ -68,8 +68,26 @@ const addListeners = () => {
 
 const completelibraryListeners = () => {
   completelibraryCatalog.addEventListener('click', e => {
-    productModal(e)
+    if(e.target.className === 'image-link'){
+        productModal(e)
+    }
   });
+}
+
+const modalListeners = () => {
+    //AMOUNT OF MODAL LISTENERS INCREMENT EACH TIME I ACCESS A MODAL, WHERE CAN I ADD THE MODALS INSTEAD???
+    
+    modal.addEventListener('click', (e) =>{
+        if (e.target.className.includes('check-out-book') ){
+            checkOutBook(e)
+        }
+        else if (e.target.className.includes('adopt-book') ){
+            adoptBook(e)
+        }
+        else if (e.target.className.includes('edit-book') ){
+            editBook(e)
+        }
+    });
 }
 
 
@@ -101,7 +119,7 @@ const fetchEntireCatalog = () => {
                 <!-- <a href=""> -->
                 <div class="book-card" data-id= ${book.id}>
                   <div class="book-cover">
-                    <img src='${book.img_url}' style='width: 152px'><img>
+                    <img class="image-link" src='${book.img_url}' style='width: 152px'><img>
                   </div>
                   <div class="book-text-info">
                     <div class="author">
@@ -136,6 +154,16 @@ const googleMapsRendering = (libraryId) => {
     fetchCatalogLibrary(libraryId)    
 
 }
+
+
+const renderMap = (e) => {
+    mapContainer.style.display = "block";
+    landingButtons.style.display ='block'
+    individuaLibraryCatalog.style.display ='none'
+    allLibrariesCatalog.style.display = "none";
+    console.log(e.target)  
+}
+
 const renderLibraryInfo = (library) => {
     let libInfo = document.querySelector(".library-info-container")
     let libDiv =
@@ -194,12 +222,11 @@ const renderButtons = (library) => {
     buttonWrapper.innerHTML = buttons
 }
 
-const customizeModal= (e, bookId) =>{
+const customizeModal = (e, bookId) =>{
+    console.log(e.target)
     fetch(BOOKS_URL+`/${bookId}`)
     .then(response => response.json())
     .then(book => {
-        console.log(book)
-        debugger
         let modalContent = 
         `<div class="modal-content">
         <div class="modal-header">
@@ -218,19 +245,19 @@ const customizeModal= (e, bookId) =>{
         </div>
         <div class="modal-footer text-center">
           <div class="col-12">
-            <button type="button" class="btn btn-primary" data-id="${book.id}">ADOPT</button>
+            <button type="button" class="btn btn-primary adopt-book" data-id="${book.id}">ADOPT</button>
           </div>
           <div class="col-12">
-            <button type="button" class="btn btn-primary" data-id="${book.id}">CHECK OUT</button>
+            <button type="button" class="btn btn-primary check-out-book" data-id="${book.id}">CHECK OUT</button>
           </div>
           <div class="col-12">
-            <button type="button" class="btn btn-primary"data-id="${book.id}">EDIT</button>
+            <button type="button" class="btn btn-primary edit-book" data-id="${book.id}">EDIT</button>
           </div>
         </div>
       </div>`
         modal.innerHTML = modalContent
         myModal.toggle()
-
+        modalListeners()
     });
 
 }
@@ -240,7 +267,7 @@ const customizeModal= (e, bookId) =>{
 
 const productModal = (e) => {
     let bookId = e.target.parentElement.parentElement.dataset.id
-      customizeModal(e, bookId)
+    customizeModal(e, bookId)
  
 }
 
@@ -250,20 +277,9 @@ const libraryInfo = (e) => {
 
 }
 
-const renderMap = (e) => {
-    mapContainer.style.display = "block";
-    landingButtons.style.display ='block'
-    individuaLibraryCatalog.style.display ='none'
-    allLibrariesCatalog.style.display = "none";
-    console.log(e.target)
-
-}
-
-
-
-
 
 //book actions
+
 // EVERY TIME I GO FROM THE MAP PAGE TO THE LIBRARY THE BUTTONS CONSOLE LOG MULTIPLIES WHY? IS IT BECAUSE OF EVENT LISTENERS???
 const donateBook = (e) => {
     console.log(e.target, 'entered event')
@@ -276,6 +292,13 @@ const returnBook = (e) => {
 }
 
 const adoptBook = (e) => {
+    console.log(e.target, 'entered event')
+}
+
+const checkOutBook = e => {
+    console.log(e.target, 'entered event')
+}
+const editBook = e => {
     console.log(e.target, 'entered event')
 }
         
