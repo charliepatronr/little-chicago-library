@@ -3,6 +3,13 @@ const landingButtons = document.querySelector(".landing-page-buttons")
 const allLibrariesCatalog = document.querySelector('.libraries-catalog')
 const individuaLibraryCatalog = document.getElementById('main-individual-library')
 const mapContainer = document.querySelector('#map-container')
+const completelibraryCatalog = document.querySelector('#library-catalog')
+let myModal = new bootstrap.Modal(document.getElementById('exampleModal'), {
+    keyboard: false
+    })
+const modal = document.getElementById('modal-dialog')
+
+
 
 // listeners 
 
@@ -15,7 +22,7 @@ const landingPageListeners = () => {
             individuaLibraryCatalog.style.display ='none'
             allLibrariesCatalog.style.display = "block";
             fetchEntireCatalog()
-            addModalListeners()
+            completelibraryListeners()
         }
         // else if (e.target.className ==='toggle-map-individual-library') {
         //     mapContainer.style.display = "none";
@@ -52,19 +59,17 @@ const addListeners = () => {
         else if (e.target.className === 'adopt-book'){
             adoptBook(e)
         }
+        else if (e.target.className === 'adopt-book'){
+            adoptBook(e)
+        }
         
     });
 }
 
-const addModalListeners = () => {
-  let myModal = new bootstrap.Modal(document.getElementById('exampleModal'), {
-    keyboard: false
-  })
-  const libraryCatalog = document.querySelector('#library-catalog')
-  libraryCatalog.addEventListener('click', e => {
-  console.log(e.target);
-  myModal.toggle()
-  })
+const completelibraryListeners = () => {
+  completelibraryCatalog.addEventListener('click', e => {
+    productModal(e)
+  });
 }
 
 
@@ -172,10 +177,7 @@ const renderIndivCatalog = (library) => {
         </div>
     </div>`
     });
-    
     catalogContainer.innerHTML = catalog
-    debugger
-    console.log(catalogContainer)
 }
 
 
@@ -192,11 +194,54 @@ const renderButtons = (library) => {
     buttonWrapper.innerHTML = buttons
 }
 
+const customizeModal= (e, bookId) =>{
+    fetch(BOOKS_URL+`/${bookId}`)
+    .then(response => response.json())
+    .then(book => {
+        console.log(book)
+        debugger
+        let modalContent = 
+        `<div class="modal-content">
+        <div class="modal-header">
+          <div class="col-6">
+            <h5 class="modal-title" id="exampleModalLabel">${book.title}</h5>
+            <h5 class="modal-author" id="exampleModalLabel">${book.author}</h5>
+          </div>
+          <div class="col-6">
+            <button type="button" class="btn-close d-block d-sm-block d-md-none float-right" data-dismiss="modal" aria-label="Close"></button>
+          </div>
+        </div>
+        <div class="modal-body text-center">
+          <img class="img-fluid" src='${book.img_url}' style='width: 300px'><img>
+          <br><br>
+          <p>“${book.description}”</p>
+        </div>
+        <div class="modal-footer text-center">
+          <div class="col-12">
+            <button type="button" class="btn btn-primary" data-id="${book.id}">ADOPT</button>
+          </div>
+          <div class="col-12">
+            <button type="button" class="btn btn-primary" data-id="${book.id}">CHECK OUT</button>
+          </div>
+          <div class="col-12">
+            <button type="button" class="btn btn-primary"data-id="${book.id}">EDIT</button>
+          </div>
+        </div>
+      </div>`
+        modal.innerHTML = modalContent
+        myModal.toggle()
+
+    });
+
+}
+
 //NAVIGATION BETWEEN PAGES 
 
 
 const productModal = (e) => {
-    console.log(e.target)
+    let bookId = e.target.parentElement.parentElement.dataset.id
+      customizeModal(e, bookId)
+ 
 }
 
 
