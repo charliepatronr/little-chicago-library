@@ -299,7 +299,51 @@ const checkOutBook = e => {
     console.log(e.target, 'entered event')
 }
 const editBook = e => {
-    console.log(e.target, 'entered event')
+    let bookId = e.target.dataset.id
+    fetch(BOOKS_URL+`/${bookId}`)
+    .then(response => response.json())
+    .then(book => {
+    let modalContent = 
+    ` <div class="modal-content">
+    <div class="modal-header">
+      <div class="col-6">
+        <h5 class="modal-title">Edit Book Info</h5>
+      </div>
+      <div class="col-6">
+        <button type="button" class="btn-close d-block d-sm-block d-md-none float-right" data-dismiss="modal" aria-label="Close"></button>
+      </div>
+    </div>
+    <div class="modal-body text-center">
+    <!-- FORM BEGINS HERE -->
+      <div class="mb-3">
+        <label for="title" class="form-label">Book Title</label>
+        <input type="text" class="form-control" id="title" value="${book.title}">
+      </div>
+      <div class="mb-3">
+        <label for="author" class="form-label">Author</label>
+        <input type="text" class="form-control" id="author" value="${book.author}">
+      </div>
+      <div class="mb-3">
+        <label for="genre" class="form-label">Genre</label>
+        <input type="text" class="form-control" id="genre" placeholder="Genre" value="${book.genre}">
+      </div>
+      <div class="mb-3">
+        <label for="img_url" class="form-label">img_url</label>
+        <input type="text" class="form-control" id="img_url" value="${book.img_url}">
+      </div>
+      <div class="mb-3">
+        <label for="description" class="form-label">Thoughts on this book?</label>
+        <textarea class="form-control" id="description" placeholder="About this Book" rows="3"> ${book.description}</textarea>
+      </div>
+      <!-- FORM ENDS HERE -->
+    </div>
+    <div class="modal-footer text-center">
+      <button type="button" class="btn btn-primary" data-id=${book.id}>SAVE</button>
+    </div>
+  </div>`
+  modal.innerHTML = modalContent
+    
+    });
 }
         
 
@@ -307,7 +351,7 @@ const editBook = e => {
 const main = () =>{
     landingPageListeners()
     fetchEntireCatalog()
-    
+
 }
 
 
