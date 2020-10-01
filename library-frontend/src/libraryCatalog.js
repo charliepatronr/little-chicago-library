@@ -75,7 +75,6 @@ const completelibraryListeners = () => {
 }
 
 const modalListeners = () => {
-    //AMOUNT OF MODAL LISTENERS INCREMENT EACH TIME I ACCESS A MODAL, WHERE CAN I ADD THE MODALS INSTEAD???
 
     modal.addEventListener('click', (e) =>{
         if (e.target.className.includes('check-out-book') ){
@@ -101,7 +100,7 @@ const fetchCatalogLibrary = (libraryId) => {
         renderIndivCatalog(response);
         renderLibraryInfo(response);
         renderButtons(response)
-        addListeners();
+        
     });
 }
 
@@ -257,7 +256,6 @@ const customizeModal = (e, bookId) =>{
       </div>`
         modal.innerHTML = modalContent
         myModal.toggle()
-        modalListeners()
     });
 
 }
@@ -341,6 +339,7 @@ const editBook = e => {
       <button type="button" class="btn btn-primary" data-id=${book.id}>SAVE</button>
     </div>
   </div>`
+  debugger
   modal.innerHTML = modalContent
     
     });
@@ -349,8 +348,10 @@ const editBook = e => {
 
 
 const main = () =>{
-    landingPageListeners()
-    fetchEntireCatalog()
+    landingPageListeners();
+    fetchEntireCatalog();
+    modalListeners();
+    addListeners();
 
 }
 
