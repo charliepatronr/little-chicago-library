@@ -76,7 +76,7 @@ const completelibraryListeners = () => {
 
 const modalListeners = () => {
     //AMOUNT OF MODAL LISTENERS INCREMENT EACH TIME I ACCESS A MODAL, WHERE CAN I ADD THE MODALS INSTEAD???
-    
+
     modal.addEventListener('click', (e) =>{
         if (e.target.className.includes('check-out-book') ){
             checkOutBook(e)
