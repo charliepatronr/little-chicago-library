@@ -40,12 +40,18 @@ const displayAdoptModal = e => {
     }
     fetch(`http://localhost:3000/book_logs/${bookLogId}`, reqObj)
       .then(res => res.json())
-      .then(updateAdoptFrontend);
+      .then(book_log => {
+        let divsToUpdate = document.querySelectorAll(`[data-book-id='${book_log.book_id}']`)
+        for(let i=0; i < divsToUpdate.length; i++){
+          divsToUpdate[i].parentElement.classList.remove('adopted-false')
+          divsToUpdate[i].parentElement.classList.add(`adopted-${book_log.adopted}`)
+        }
+        updateAdoptFrontend(book_log);
+        });
   } 
 
 
   const updateAdoptFrontend = updatedBookLog => {
-    console.log(updatedBookLog);
     modalContent = 
     `<div class="modal-content">
         <div class="modal-header">
@@ -69,6 +75,5 @@ const displayAdoptModal = e => {
     let thanksBtn = document.querySelector('#thanks-btn')
     thanksBtn.addEventListener('click', (e) =>{
       myModal.toggle()
-      location.reload();
-    })  
+    });
   } 

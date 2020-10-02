@@ -56,13 +56,10 @@ function donatePostBook(e, updateData){
         },
         body: JSON.stringify(updateData)
     }
-    debugger
     fetch('http://localhost:3000/books', reqObj)
     .then(resp => resp.json())
     .then(book => {
-        debugger
         let catalogContainer = document.getElementById('ind-book-catalog-row')
-        console.log(catalogContainer)
         let catalog = `
         <div class="col-6 col-sm-6 col-md-2">
             <div class="book-card" data-book-id= ${book.id} data-library-id = '${book.libraries[0].id}'>

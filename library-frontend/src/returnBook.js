@@ -66,9 +66,11 @@ const returnBookFetch = (e, updateData) => {
     fetch(BOOKS_URL+`/${newUpdatedData.bookId}`, newConfigObj)
     .then(response => response.json())
     .then(book => {
-        let bookCard = document.querySelectorAll(`[data-book-id='${book.id}']`)[0]
-        if(bookCard){
-            bookCard.remove()
+        let bookCard = document.querySelectorAll(`[data-book-id='${book.id}']`)
+        if(bookCard.length > 0){
+            for(let i = 0; i < bookCard.length; i++){
+                bookCard[i].remove()
+            }
         }
 
         let catalogContainer = document.getElementById('ind-book-catalog-row')
