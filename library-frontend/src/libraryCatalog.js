@@ -29,6 +29,12 @@ const landingPageListeners = () => {
             individuaLibraryCatalog.style.display ='none'
             allLibrariesCatalog.style.display = "none";
         }
+        else if (e.target.className.includes('new-library')){
+            // mapContainer.style.display = "block";
+            newLibrary(e)
+            individuaLibraryCatalog.style.display ='none'
+            allLibrariesCatalog.style.display = "none";
+        }
     });
 }
 
@@ -90,6 +96,9 @@ const modalListeners = () => {
         }
         else if (e.target.className.includes('save') ){
             saveChanges(e)
+        }
+        else if (e.target.className.includes('new-library') ){
+            fetchNewLibrary(e)
         }
     });
 }
@@ -383,6 +392,9 @@ const saveChanges = e => {
 
     }
     
+}
+const newLibrary = (e) => {
+    renderNewLibraryForm(e)
 }
         
 

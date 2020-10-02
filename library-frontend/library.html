@@ -54,6 +54,41 @@
 
     </div>
 
+    <div class="modal-content">
+        <div class="modal-header">
+            <div class="col-6">
+            <h5 class="modal-title" id="exampleModalLabel"></h5>
+            <h5 class="modal-author" id="exampleModalLabel"></h5>
+            </div>
+            <div class="col-6">
+            <button type="button" class="btn-close d-block d-sm-block d-md-none float-right" data-dismiss="modal" aria-label="Close"></button>
+            </div>
+        </div>
+        <div class="modal-body text-center">
+            <label for="title" class="form-label">Book Title</label>
+            <input type="text" class="form-control" id="title" value=" ">
+            <div class="mb-3">
+            <label for="author" class="form-label">Author</label>
+            <input type="text" class="form-control" id="author" value=" ">
+            </div>
+            <div class="mb-3">
+            <label for="genre" class="form-label">Genre</label>
+            <input type="text" class="form-control" id="genre" placeholder="Genre" value=" ">
+            </div>
+            <div class="mb-3">
+            <label for="img_url" class="form-label">img_url</label>
+            <input type="text" class="form-control" id="img_url" value=" ">
+            </div>
+            <div class="mb-3">
+            <label for="description" class="form-label">Thoughts on this book?</label>
+            <textarea class="form-control" id="description" placeholder="About this Book" rows="3"></textarea>
+            </div>
+        </div>
+        <div class="modal-footer text-center">
+            <button type="button" class="btn btn-primary donate-btn save" id="donate-btn" data-action='donate'>DONATE!</button>
+        </div>
+    </div>
+
 </body>
     <script src='./src/libraryCatalog.js' defer></script>
 </html>
