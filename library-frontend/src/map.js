@@ -247,8 +247,8 @@ function initMap() {
   function addClickListeners(marker){
       
     const infowindow = new google.maps.InfoWindow({
-        content: `Little Library name: ${marker.libraryName}
-        Location: ${marker.location}` 
+        content: `<b>Little Library name:</b> ${marker.libraryName}<br><br>
+        <b>Location:</b> ${marker.location}` 
         ,
       });
       
