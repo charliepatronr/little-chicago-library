@@ -2834,7 +2834,7 @@ fieldset:disabled .btn {
   background-color: #FFD23F;
   border-color: #000; */
   font-weight: 600;
-  background-image: linear-gradient(to right, #e5dfe8, #e5dfe8, #FFC821);
+  background-image: linear-gradient(to right, #e5dfe8, #FFC821);
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center center;
@@ -2850,7 +2850,7 @@ fieldset:disabled .btn {
   border-color: #000; */
   /* box-shadow: 0 0 0 0.25rem rgba(49, 132, 253, 0.5); */
   font-weight: 600;
-  background-image: linear-gradient(to right, #e5dfe8, #e5dfe8, #FFC821);
+  background-image: linear-gradient(to right, #e5dfe8, #FFC821);
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center center;
@@ -2866,7 +2866,7 @@ fieldset:disabled .btn {
   background-color:  #FFD23F;
   border-color: #000; */
   font-weight: 500;
-  background-image: linear-gradient(to right, #e5dfe8, #e5dfe8, #FFC821);
+  background-image: linear-gradient(to right, #e5dfe8, #FFC821);
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center center;
@@ -2880,7 +2880,7 @@ fieldset:disabled .btn {
 .show > .btn-primary.dropdown-toggle:focus {
   /* box-shadow: 0 0 0 0.25rem rgba(49, 132, 253, 0.5); */
   font-weight: 500;
-  background-image: linear-gradient(to right, #e5dfe8, #e5dfe8, #FFC821);
+  background-image: linear-gradient(to right, #e5dfe8, #FFC821);
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center center;

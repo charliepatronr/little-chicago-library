@@ -121,7 +121,6 @@ const fetchEntireCatalog = () => {
                 let bookLog = library.book_logs.find(element => element.book_id === book.id)
                 bookCards += 
                 `<div class="col-6 col-sm-6 col-md-2 available-${bookLog.available} adopted-${bookLog.adopted}">
-                <!-- <a href=""> -->
                 <div class="book-card" data-book-id= '${book.id}' data-library-id= '${library.id}'>
                   <div class="book-cover">
                     <img class="image-link img-fluid" src='${book.img_url}' style='width: 152px'><img>
@@ -135,7 +134,6 @@ const fetchEntireCatalog = () => {
                     </div>
                   </div>
                 </div>
-                <!-- </a> -->
               </div>`
             });
         })

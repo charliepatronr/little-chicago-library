@@ -18,7 +18,7 @@ function initMap() {
 
     var icon = {
         url: './assets/library_icon.png', // url
-        scaledSize: new google.maps.Size(50, 75), // scaled size
+        scaledSize: new google.maps.Size(45, 75), // scaled size
         origin: new google.maps.Point(0,0), // origin
         anchor: new google.maps.Point(0, 0) // anchor
     };
