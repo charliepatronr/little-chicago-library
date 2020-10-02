@@ -228,8 +228,8 @@ const customizeModal = (e, bookId) =>{
         `<div class="modal-content">
         <div class="modal-header">
           <div class="col-6">
-            <h5 class="modal-title" id="exampleModalLabel">${book.title}</h5>
-            <h5 class="modal-author" id="exampleModalLabel">${book.author}</h5>
+            <h5 class="modal-author" id="modal-author"><a href="">${book.author}</a></h5>
+            <h5 class="modal-title" id="modal-title">${book.title}</h5>
           </div>
           <div class="col-6">
             <button type="button" class="btn-close d-block d-sm-block d-md-none float-right" data-dismiss="modal" aria-label="Close"></button>
@@ -242,13 +242,13 @@ const customizeModal = (e, bookId) =>{
         </div>
         <div class="modal-footer text-center">
           <div class="col-12">
-            <button type="button" class="btn btn-primary adopt-book" data-booklog="${book.book_logs[0].id}" data-id="${book.id}">ADOPT</button>
+            <button type="button" class="btn btn-primary adopt-book btn-block" data-booklog="${book.book_logs[0].id}" data-id="${book.id}">ADOPT</button>
           </div>
           <div class="col-12">
-            <button type="button" class="btn btn-primary check-out-book"  data-booklog="${book.book_logs[0].id}" data-id="${book.id}">CHECK OUT</button>
+            <button type="button" class="btn btn-primary check-out-book btn-block"  data-booklog="${book.book_logs[0].id}" data-id="${book.id}">CHECK OUT</button>
           </div>
           <div class="col-12">
-            <button type="button" class="btn btn-primary edit-book" data-id="${book.id}">EDIT</button>
+            <button type="button" class="btn btn-primary edit-book btn-block" data-id="${book.id}">EDIT</button>
           </div>
         </div>
       </div>`
