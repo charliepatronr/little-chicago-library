@@ -43,13 +43,13 @@ const addListeners = () => {
         else if (e.target.className ==='library'){
             libraryInfo(e)
         }
-        else if (e.target.className === 'toggle-map'){
+        else if (e.target.className.includes('toggle-map')){
             renderMap(e)
         }
-        else if (e.target.className === 'donate-book'){
+        else if (e.target.className.includes('donate-book') ){
             donateBook(e)
         }
-        else if (e.target.className === 'return-book'){
+        else if (e.target.className.includes('return-book') ){
             returnBook(e)
         }
         else if (e.target.className === 'adopt-book'){
@@ -169,17 +169,18 @@ const renderMap = (e) => {
 const renderLibraryInfo = (library) => {
     let libInfo = document.querySelector(".library-info-container")
     let libDiv =
-    `<div class= "library-information" data-id= "${library.id}">
+    `<div class= "library-information text-center" data-id= "${library.id}">
+      <div><h5><b>ABOUT THIS LIBRARY</b></h5></div><br>
         <div class="library-name">
-            <p> Name: ${library.name}</p>
+            <p><b>Name:</b> ${library.name}</p>
         </div>
         <div class= "library-location">
-            <p> Location: ${library.location}</p>
+            <p><b>Location:</b> ${library.location}</p>
         </div>
         <div class= "library-num-of-books">
-            <p>Number of Books: ${library.book_logs.length}</p>
+            <p><b>Number of Books:</b> ${library.book_logs.length}</p>
         </div>
-    </div>`
+    </div><br>`
     libInfo.innerHTML = libDiv
 }
 
@@ -214,9 +215,16 @@ const renderIndivCatalog = (library) => {
 const renderButtons = (library) => {
     let buttonWrapper = document.querySelector(".button-wrapper")
     let buttons = 
-    `<button class='donate-book' data-id=${library.id}>Donate</button>
-    <button class='return-book' data-id=${library.id}>Return book</button>
-    <button class='toggle-map'>Return to Map</button>`
+    `<div class="row gy-3">
+    <div class="col-sm-6 col-md-4">
+    <button class='btn btn-primary donate-book btn-block' data-id=${library.id}>Donate 📔</button>
+    </div>
+    <div class="col-sm-6 col-md-4">
+    <button class='btn btn-primary return-book btn-block' data-id=${library.id}>Return 📔</button>
+    </div>
+    <div class="col-sm-6 col-md-4">
+    <button class='btn btn-primary toggle-map btn-block'>Map  🗺</button>
+    </div></div>`
     buttonWrapper.innerHTML = buttons
 }
 

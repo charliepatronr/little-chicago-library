@@ -12,10 +12,6 @@ body {
     .lib-banner {display: none;}
 }
 
-/* #map-container {
-
-} */
-
 #map {
   border: 5px solid #333;
   width: 80vw;
@@ -79,7 +75,7 @@ body {
 }
 
 .navbar-light {
-  padding-right: 5rem;
+  padding-right: 2rem;
   padding-left: 1rem;
 }
 
@@ -89,5 +85,9 @@ body {
   padding-right: 15px;
   padding-left: 15px;
   font-weight: 500;
+}
+
+.button-wrapper {
+  padding-bottom: 38px;
 }
 
