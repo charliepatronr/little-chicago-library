@@ -124,7 +124,7 @@ const fetchEntireCatalog = () => {
                 <!-- <a href=""> -->
                 <div class="book-card" data-book-id= '${book.id}' data-library-id= '${library.id}'>
                   <div class="book-cover">
-                    <img class="image-link" src='${book.img_url}' style='width: 152px'><img>
+                    <img class="image-link img-fluid" src='${book.img_url}' style='width: 152px'><img>
                   </div>
                   <div class="book-text-info">
                     <div class="author">
@@ -194,7 +194,7 @@ const renderIndivCatalog = (library) => {
        <div class="col-6 col-sm-6 col-md-2 available-${bookLog.available} adopted-${bookLog.adopted}">
         <div class="book-card" data-book-id='${book.id}' data-library-id = '${library.id}'>
             <div class="book-cover">
-                <img src='${book.img_url}' class='image-link'style='width: 152px'><img>
+                <img src='${book.img_url}' class='image-link img-fluid' style='width: 152px'><img>
             </div>
             <div class="book-text-info">
                 <div class="author">
