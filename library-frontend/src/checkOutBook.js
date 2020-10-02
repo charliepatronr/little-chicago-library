@@ -1,6 +1,4 @@
 const displayCheckOutModal = (e) => {
-    debugger
-    console.log(e);
       bookId = parseInt(e.target.dataset.bookId)
       bookLogId = parseInt(e.target.dataset.booklog)
       let modalContent = 
@@ -40,12 +38,18 @@ const displayCheckOutModal = (e) => {
     }
     fetch(`http://localhost:3000/book_logs/${bookLogId}`, reqObj)
       .then(res => res.json())
-      .then(updateCheckoutFrontend);
+      .then(book_log => {
+          let divsToUpdate = document.querySelectorAll(`[data-book-id='${book_log.book_id}']`)
+          for(let i=0; i < divsToUpdate.length; i++){
+            divsToUpdate[i].parentElement.classList.remove('available-true')
+            divsToUpdate[i].parentElement.classList.add(`available-${book_log.available}`)
+          }
+          updateCheckoutFrontend(book_log)
+      });
   } //end of adoptBook
 
 
   const updateCheckoutFrontend = updatedBookLog => {
-    console.log(updatedBookLog);
     modalContent = 
     `<div class="modal-content">
         <div class="modal-header">
@@ -69,6 +73,5 @@ const displayCheckOutModal = (e) => {
     let thanksBtn = document.querySelector('#thanks-btn')
     thanksBtn.addEventListener('click', (e) =>{
       myModal.toggle()
-      location.reload();
     })  
   }

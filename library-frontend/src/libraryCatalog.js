@@ -24,15 +24,11 @@ const landingPageListeners = () => {
             fetchEntireCatalog()
             completelibraryListeners()
         }
-        // else if (e.target.className ==='toggle-map-individual-library') {
-        //     mapContainer.style.display = "none";
-        //     allLibrariesCatalog.style.display = "none";
-        //     individuaLibraryCatalog.style.display ='block'
-        //     //have to put fetch library here because the library we are fetching is dependant on 
-        //     //the library the user clicks which each time fetches a library with certain id
-        //     // however this causes buttons and images console.log to increase every time
-        //     fetchCatalogLibrary()
-        // }
+        else if (e.target.className.includes('nav-link active')){
+            mapContainer.style.display = "block";
+            individuaLibraryCatalog.style.display ='none'
+            allLibrariesCatalog.style.display = "none";
+        }
     });
 }
 
@@ -78,7 +74,6 @@ const modalListeners = () => {
 
     modal.addEventListener('click', (e) =>{
         if (e.target.className.includes('check-out-book') ){
-            debugger
             displayCheckOutModal(e)
         }
         else if (e.target.className.includes('checkout-fetch-btn') ){
@@ -171,7 +166,6 @@ const renderMap = (e) => {
     landingButtons.style.display ='block'
     individuaLibraryCatalog.style.display ='none'
     allLibrariesCatalog.style.display = "none";
-    console.log(e.target)  
 }
 
 const renderLibraryInfo = (library) => {
@@ -193,7 +187,6 @@ const renderLibraryInfo = (library) => {
 
 const renderIndivCatalog = (library) => {
     let catalogContainer = document.getElementById('ind-book-catalog-row')
-    console.log(catalogContainer)
     let catalog = ''
     library.books.forEach(book => {
         let bookLog = library.book_logs.find(element => element.book_id === book.id)
@@ -230,7 +223,6 @@ const renderButtons = (library) => {
 }
 
 const customizeModal = (e, bookId) =>{
-    console.log(e.target)
     fetch(BOOKS_URL+`/${bookId}`)
     .then(response => response.json())
     .then(book => {
@@ -279,7 +271,6 @@ const productModal = (e) => {
 
 
 const libraryInfo = (e) => {
-    console.log(e.target)
 
 }
 
@@ -378,11 +369,9 @@ const saveChanges = e => {
         }
         
         if(updateData.book_action === 'edit'){
-            console.log(' ENTERED EDIT IF STATEMENT')
             editBookFetch(e, updateData)
         }
         else if (updateData.book_action === 'return') {
-            console.log('SAVED RETURN fucntion')
             returnBookFetch(e, updateData)
         }
 
