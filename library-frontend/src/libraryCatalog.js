@@ -37,7 +37,7 @@ const landingPageListeners = () => {
 const addListeners = () => {
     let container = document.getElementById('main-individual-library')
     container.addEventListener('click', (e) => {
-        if(e.target.className == 'image-link'){
+        if( e.target.className.includes('image-link') ){
             productModal(e)
         }
         else if (e.target.className ==='library'){
@@ -64,7 +64,7 @@ const addListeners = () => {
 
 const completelibraryListeners = () => {
   completelibraryCatalog.addEventListener('click', e => {
-    if(e.target.className === 'image-link'){
+    if( e.target.className.includes('image-link') ){
         productModal(e)
     }
   });

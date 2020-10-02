@@ -12,10 +12,16 @@ body {
     .lib-banner {display: none;}
 }
 
+/* #map-container {
+
+} */
+
 #map {
   border: 5px solid #333;
   width: 80vw;
   height: 80vh;
+  left: 50%;
+  transform: translateX(-50%);
 }
 
 .available-false img {
@@ -84,3 +90,4 @@ body {
   padding-left: 15px;
   font-weight: 500;
 }
+

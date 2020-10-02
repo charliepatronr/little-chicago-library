@@ -37,69 +37,70 @@
     </div>
   </nav>
 
+<!-- OUTERMOST DIV -->
 <div class="container"><!-- outer div -->
 
-    <!-- TEST MODAL -->
-    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-      <div class="modal-dialog" id='modal-dialog'>
-      </div>
+  <!-- TEST MODAL -->
+  <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" id='modal-dialog'>
     </div>
+  </div>
 
 
 <!-- LIBRARY CONTAINER BEGINS -->
 <div class='libraries-catalog'  style = "display: none;">
 
-    <!-- BOOK CARDS -->
-    <div class="container overflow-hidden" id="library-catalog" style="display:block;">
-      <div class="row gy-3" id ='book-catalog-row'>
-      </div>
+  <!-- BOOK CARDS -->
+  <div class="container overflow-hidden" id="library-catalog" style="display:block;">
+    <div class="row gy-3" id ='book-catalog-row'>
     </div>
-    <!-- LIBRARY CONTAINER ENDS -->
+  </div>
+  <!-- LIBRARY CONTAINER ENDS -->
 </div>
 
-    
-    <div id="map-container">
+  
+  <div id="map-container">
 
-      <div id="map">
+    <div id="map">
+    </div>
+  </div>
+
+
+  <div id='main-individual-library' style = "display: none;" >
+
+      <div class= "button-wrapper">
       </div>
-    </div>
+     
 
+      <div class= "library-info-container">
 
-    <div id='main-individual-library' style = "display: none;" >
-
-        <div class= "button-wrapper">
+      </div>
+      
+      <div class="container overflow-hidden">
+        <div class="row gy-3" id ='ind-book-catalog-row'>
         </div>
-       
-
-        <div class= "library-info-container">
-
-        </div>
-        
-        <div class="container overflow-hidden">
-          <div class="row gy-3" id ='ind-book-catalog-row'>
-          </div>
-        </div>
-        
+      </div>
+      
 
 
-    </div>
+  </div>
 
-    </div> <!-- outer div -->
+  </div> <!-- outer div -->
 
 
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous" defer></script>
-    <!-- <script src="js/bootstrap.js" defer></script> -->
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha2/js/bootstrap.bundle.min.js" integrity="sha384-BOsAfwzjNJHrJ8cZidOg56tcQWfp6y72vEJ8xQ9w6Quywb24iOsW913URv1IS4GD" crossorigin="anonymous" defer></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous" defer></script>
+  <!-- <script src="js/bootstrap.js" defer></script> -->
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha2/js/bootstrap.bundle.min.js" integrity="sha384-BOsAfwzjNJHrJ8cZidOg56tcQWfp6y72vEJ8xQ9w6Quywb24iOsW913URv1IS4GD" crossorigin="anonymous" defer></script>
 
 </body>
 <!-- place this script tag inside body or head tags? -->
-    <script src='./src/index.js' defer></script>
-    <script src='./src/libraryCatalog.js' defer></script>
-    <script src= "https://maps.googleapis.com/maps/api/js?key=AIzaSyAiy-SqHc3GkmaJ9uQ4VFymuK90SfRG46w&callback=initMap&libraries=&v=weekly" defer></script>
-    <script src= './src/map.js'></script>
-    <script src= './src/editBook.js'></script>
-    <script src= './src/returnBook.js'></script>
-    <script src= './src/donateBook.js'></script>
-    <script src= './src/adoptBook.js'></script>
-    <script src= './src/checkOutBook.js'></script>
+  <script src='./src/index.js' defer></script>
+  <script src='./src/libraryCatalog.js' defer></script>
+  <script src= "https://maps.googleapis.com/maps/api/js?key=AIzaSyAiy-SqHc3GkmaJ9uQ4VFymuK90SfRG46w&callback=initMap&libraries=&v=weekly" defer></script>
+  <script src= './src/map.js'></script>
+  <script src= './src/editBook.js'></script>
+  <script src= './src/returnBook.js'></script>
+  <script src= './src/donateBook.js'></script>
+  <script src= './src/adoptBook.js'></script>
+  <script src= './src/checkOutBook.js'></script>
 </html>
