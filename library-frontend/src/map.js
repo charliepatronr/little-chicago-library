@@ -9,11 +9,12 @@ let libraryArr = []
 let libObj = []
 let obj
 function initMap() {
-
+    geocoder = new google.maps.Geocoder()
     fetch(LIBRARIES_URL)
     .then(response => response.json())
     .then(response => { 
-        libraryInfo(response)
+        // libraryInfo(response)
+        geoCodeAdresses(response)
     });
 
     var icon = {
@@ -23,37 +24,76 @@ function initMap() {
         anchor: new google.maps.Point(0, 0) // anchor
     };
 
-    const libraryInfo = (libraries) => {
-        let obj
-        for(let element in libraries){
-            const {id, lat, location, long, name} = libraries[element]
-            obj = {
-                id: id, 
-                name: name,
-                lat: lat, 
-                long: long, 
-                location: location,
-                // img_url: img_url
-            }
-            libObj.push(obj)
+
+  const geoCodeAdresses = (libraries) => {
+    for(let element in libraries){
+        const {id, location, name} = libraries[element]
+        obj = {
+            id: id, 
+            name: name,
+            // lat: lat, 
+            // long: long, 
+            location: location,
+            // img_url: img_url
         }
+        libObj.push(obj)
+      }        
         for (let i = 0; i < libObj.length; ++i) {
-            const marker = new google.maps.Marker({
-              position: {
-                lat: libObj[i].lat,
-                lng: libObj[i].long,
-              },
-              map: map,
-              libraryId: libObj[i].id,
-              libraryName: libObj[i].name, 
-              location: libObj[i].location, 
-              animation: google.maps.Animation.DROP,
-              icon: icon,
-            //   imgUrl: libObj[i].img_url
-            });
+          geocoder.geocode( { 'address': libObj[i].location}, function(results, status) {
+            if (status == 'OK') {
+              map.setCenter(results[0].geometry.location);
+                  const marker = new google.maps.Marker({
+                  map: map,
+                  position: results[0].geometry.location, 
+                  libraryId: libObj[i].id,
+                  libraryName: libObj[i].name, 
+                  location: libObj[i].location, 
+                  animation: google.maps.Animation.DROP,
+                  icon: icon
+              });
             addClickListeners(marker);
-          }
-    }
+
+            } else {
+              debugger
+              alert('Geocode was not successful for the following reason: ' + status);
+            }
+      
+          });
+        }
+    } 
+
+    // const libraryInfo = (libraries) => {
+    //   debugger
+    //     let obj
+    //     for(let element in libraries){
+    //         const {id, lat, location, long, name} = libraries[element]
+    //         obj = {
+    //             id: id, 
+    //             name: name,
+    //             lat: lat, 
+    //             long: long, 
+    //             location: location,
+    //             // img_url: img_url
+    //         }
+    //         libObj.push(obj)
+    //     }
+    //     for (let i = 0; i < libObj.length; ++i) {
+    //         const marker = new google.maps.Marker({
+    //           position: {
+    //             lat: libObj[i].lat,
+    //             lng: libObj[i].long,
+    //           },
+    //           map: map,
+    //           libraryId: libObj[i].id,
+    //           libraryName: libObj[i].name, 
+    //           location: libObj[i].location, 
+    //           animation: google.maps.Animation.DROP,
+    //           icon: icon,
+    //         //   imgUrl: libObj[i].img_url
+    //         });
+    //         addClickListeners(marker);
+    //       }
+    // }
 
     map = new google.maps.Map(document.getElementById("map"), {
             center: {
@@ -242,7 +282,6 @@ function initMap() {
     });
 
 
- 
 
   function addClickListeners(marker){
       
