@@ -78,9 +78,16 @@ const modalListeners = () => {
 
     modal.addEventListener('click', (e) =>{
         if (e.target.className.includes('check-out-book') ){
+            debugger
+            displayCheckOutModal(e)
+        }
+        else if (e.target.className.includes('checkout-fetch-btn') ){
             checkOutBook(e)
         }
         else if (e.target.className.includes('adopt-book') ){
+            displayAdoptModal(e)
+        }
+        else if (e.target.className.includes('adopt-btn') ){
             adoptBook(e)
         }
         else if (e.target.className.includes('edit-book') ){
@@ -116,10 +123,11 @@ const fetchEntireCatalog = () => {
         let bookCards = ''
         response.forEach(library => {
             library.books.forEach(book => {
+                let bookLog = library.book_logs.find(element => element.book_id === book.id)
                 bookCards += 
-                `<div class="col-6 col-sm-6 col-md-2">
+                `<div class="col-6 col-sm-6 col-md-2 available-${bookLog.available} adopted-${bookLog.adopted}">
                 <!-- <a href=""> -->
-                <div class="book-card" data-book-id= ${book.id} data-library-id= ${library.id}>
+                <div class="book-card" data-book-id= '${book.id}' data-library-id= '${library.id}'>
                   <div class="book-cover">
                     <img class="image-link" src='${book.img_url}' style='width: 152px'><img>
                   </div>
@@ -190,8 +198,8 @@ const renderIndivCatalog = (library) => {
     library.books.forEach(book => {
         let bookLog = library.book_logs.find(element => element.book_id === book.id)
        catalog += `
-    <div class="col-6 col-sm-6 col-md-2">
-        <div class="book-card" data-book-id= ${book.id} data-library-id = '${library.id}'>
+       <div class="col-6 col-sm-6 col-md-2 available-${bookLog.available} adopted-${bookLog.adopted}">
+        <div class="book-card" data-book-id='${book.id}' data-library-id = '${library.id}'>
             <div class="book-cover">
                 <img src='${book.img_url}' class='image-link'style='width: 152px'><img>
             </div>
@@ -244,10 +252,10 @@ const customizeModal = (e, bookId) =>{
         </div>
         <div class="modal-footer text-center">
           <div class="col-12">
-            <button type="button" class="btn btn-primary adopt-book" data-id="${book.id}">ADOPT</button>
+            <button type="button" class="btn btn-primary adopt-book" data-booklog="${book.book_logs[0].id}" data-id="${book.id}">ADOPT</button>
           </div>
           <div class="col-12">
-            <button type="button" class="btn btn-primary check-out-book" data-id="${book.id}">CHECK OUT</button>
+            <button type="button" class="btn btn-primary check-out-book"  data-booklog="${book.book_logs[0].id}" data-id="${book.id}">CHECK OUT</button>
           </div>
           <div class="col-12">
             <button type="button" class="btn btn-primary edit-book" data-id="${book.id}">EDIT</button>
@@ -288,13 +296,16 @@ const returnBook = (e) => {
     returnBookModal(e)
 }
 
-const adoptBook = (e) => {
-    console.log(e.target, 'entered event')
-}
+// const adoptBook = (e) => {
+//     console.log(e.target, 'entered event')
+// }
 
-const checkOutBook = e => {
-    console.log(e.target, 'entered event')
-}
+// const checkOutBook = e => {
+//     console.log(e.target, 'entered event')
+// }
+
+
+
 const editBook = e => {
     let bookId = e.target.dataset.id
     fetch(BOOKS_URL+`/${bookId}`)
