@@ -19,12 +19,12 @@ class BooksController < ApplicationController
     end
 
     def create 
-        library = Library.find(params[:books]['library_id'])
-        title = params[:book]['title']
-        author = params[:book]['author']
-        img_url = params[:book]['img_url']
-        genre = params[:book]['genre']
-        description = params[:book]['description']
+        library = Library.find(params['libraryId'])
+        title = params['book']['title']
+        author = params['book']['author']
+        img_url = params['book']['img_url']
+        genre = params['book']['genre']
+        description = params['book']['description']
         book = Book.create(title: title, author: author, img_url: img_url, genre: genre, description: description)
         if book.save
             library.books << book
@@ -33,27 +33,27 @@ class BooksController < ApplicationController
             render json: {message: 'Book could not be added'}
         end 
     end 
-
+    # Book.last.book_logs.find_by(book_id:Book.last.id).library
     def update
-        library = Library.find(params[:books]['library_id'])
+        bookFinder = params['bookId']
+        library = Library.find(params['libraryId'])
         #add action parameter to json to know if the book is going to be updated, checkouted, adopted or returned
-        action = params[:book]["action"]
-        book = Book.find(params[:books]['id'])
-        library_id = book.library.id
-        title = params[:book]['title']
-        author = params[:book]['author']
-        img_url = params[:book]['img_url']
-        genre = params[:book]['genre']
-        description = params[:book]['description']
-
-        case action 
+        book_action = params["book_action"]
+        book = Book.find(bookFinder)
+        title = params['book']['title']
+        author = params['book']['author']
+        img_url = params['book']['img_url']
+        genre = params['book']['genre']
+        description = params['book']['description']
+        
+        case book_action 
         when 'return'
             # delete previous Booklog
             # is has many the correct association?? a specific instance of a book can be in many libraries
             # or does the book_log define instance of this book and the library it belongs to?
-            book_log = BookLog.find_by(book_id: book.id)
+            book_log = BookLog.find_by(book_id: bookFinder)
             if library == book_log.library
-                book.update(available: false)
+                book_log.update(available: true)
                 render json: BookSerializer.new(book).to_serialized_json
 
             else 
@@ -63,7 +63,7 @@ class BooksController < ApplicationController
                 render json: BookSerializer.new(book).to_serialized_json
             end
                         
-        when 'update' 
+        when 'edit' 
             if book.update(title: title, author: author, img_url: img_url, genre: genre, description: description)
                 render json: BookSerializer.new(book).to_serialized_json
             else 
@@ -71,7 +71,7 @@ class BooksController < ApplicationController
             end 
 
         when 'check_out'
-            if book.update(available: false)
+            if book.update(available: true)
                 render json: BookSerializer.new(book).to_serialized_json
             else 
                 render json: { message: 'Book could not be checked out' }
@@ -85,7 +85,7 @@ class BooksController < ApplicationController
                 render json: { message: 'Book could not be adopted :(' }
             end
         else
-            render json: { message: 'No action available' }
+            render json: { message: 'No book_action available' }
         end
      
 

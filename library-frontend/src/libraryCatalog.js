@@ -86,6 +86,9 @@ const modalListeners = () => {
         else if (e.target.className.includes('edit-book') ){
             editBook(e)
         }
+        else if (e.target.className.includes('save') ){
+            saveChanges(e)
+        }
     });
 }
 
@@ -116,7 +119,7 @@ const fetchEntireCatalog = () => {
                 bookCards += 
                 `<div class="col-6 col-sm-6 col-md-2">
                 <!-- <a href=""> -->
-                <div class="book-card" data-id= ${book.id}>
+                <div class="book-card" data-book-id= ${book.id} data-library-id= ${library.id}>
                   <div class="book-cover">
                     <img class="image-link" src='${book.img_url}' style='width: 152px'><img>
                   </div>
@@ -188,7 +191,7 @@ const renderIndivCatalog = (library) => {
         let bookLog = library.book_logs.find(element => element.book_id === book.id)
        catalog += `
     <div class="col-6 col-sm-6 col-md-2">
-        <div class="book-card" data-id= ${book.id}>
+        <div class="book-card" data-book-id= ${book.id} data-library-id = '${library.id}'>
             <div class="book-cover">
                 <img src='${book.img_url}' class='image-link'style='width: 152px'><img>
             </div>
@@ -208,9 +211,6 @@ const renderIndivCatalog = (library) => {
 }
 
 
-const renderDonationForm = (e) => {
-
-}
 
 const renderButtons = (library) => {
     let buttonWrapper = document.querySelector(".button-wrapper")
@@ -264,7 +264,7 @@ const customizeModal = (e, bookId) =>{
 
 
 const productModal = (e) => {
-    let bookId = e.target.parentElement.parentElement.dataset.id
+    let bookId = e.target.parentElement.parentElement.dataset.bookId
     customizeModal(e, bookId)
  
 }
@@ -280,13 +280,12 @@ const libraryInfo = (e) => {
 
 // EVERY TIME I GO FROM THE MAP PAGE TO THE LIBRARY THE BUTTONS CONSOLE LOG MULTIPLIES WHY? IS IT BECAUSE OF EVENT LISTENERS???
 const donateBook = (e) => {
-    console.log(e.target, 'entered event')
-    renderDonationForm();
+    renderDonationForm(e);
 }
 
 
 const returnBook = (e) => {
-    console.log(e.target, 'entered event')
+    returnBookModal(e)
 }
 
 const adoptBook = (e) => {
@@ -336,13 +335,48 @@ const editBook = e => {
       <!-- FORM ENDS HERE -->
     </div>
     <div class="modal-footer text-center">
-      <button type="button" class="btn btn-primary" data-id=${book.id}>SAVE</button>
+      <button type="button" class="btn btn-primary save" data-id=${book.id} data-action="edit" >SAVE</button>
     </div>
   </div>`
-  debugger
-  modal.innerHTML = modalContent
-    
+    modal.innerHTML = modalContent
     });
+}
+
+const saveChanges = e => {
+    if(e.target.dataset.action === 'donate'){
+        let updateData = {
+            book_action: e.target.dataset.action,
+            libraryId: e.target.dataset.id,
+            title: document.getElementById('title').value, 
+            author: document.getElementById('author').value, 
+            genre: document.getElementById('genre').value, 
+            img_url: document.getElementById('img_url').value, 
+            description: document.getElementById('description').value
+        }
+        donatePostBook(e, updateData)
+    }
+    else {
+        let updateData = {
+            book_action: e.target.dataset.action,
+            bookId: e.target.dataset.id,
+            title: document.getElementById('title').value, 
+            author: document.getElementById('author').value, 
+            genre: document.getElementById('genre').value, 
+            img_url: document.getElementById('img_url').value, 
+            description: document.getElementById('description').value
+        }
+        
+        if(updateData.book_action === 'edit'){
+            console.log(' ENTERED EDIT IF STATEMENT')
+            editBookFetch(e, updateData)
+        }
+        else if (updateData.book_action === 'return') {
+            console.log('SAVED RETURN fucntion')
+            returnBookFetch(e, updateData)
+        }
+
+    }
+    
 }
         
 
