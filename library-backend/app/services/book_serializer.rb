@@ -11,7 +11,7 @@ class BookSerializer
                     only: [:id, :name, :location, :lat, :long]
                 }, 
                 book_logs: {
-                    only: [:id, :available, :adopted]
+                    only: [:id, :available, :adopted, :library_id, :book_id]
                 }
             },
             except: [:updated_at],
