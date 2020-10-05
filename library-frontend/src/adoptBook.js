@@ -5,17 +5,19 @@ const displayAdoptModal = e => {
     `<div class="modal-content">
         <div class="modal-header">
           <div class="col-6">
-            <h5 class="modal-title">Are you sure you want to adopt this book?</h5>
+            <h5 class="modal-title">Sure you want to adopt this book?</h5>
           </div>
           <div class="col-6">
             <button type="button" class="btn-close d-block d-sm-block d-md-none float-right" data-dismiss="modal" aria-label="Close"></button>
           </div>
         </div>
         <div class="modal-body text-center">
+          <img class="img-fluid" src='assets/book-pulp-fiction.gif' width ="100%" alt='John Travolta from Pulp Fiction reading a book in the bathroom'>
           <p>Yes, I am keeping this book.</p>
-          <button type="button" class="btn btn-primary adopt-btn" id="adopt-btn" data-id=${bookId}  data-booklog=${bookLogId}>ADOPT</button><br><br>
-          <p>No, I plan on returning this book.</p>
-          <button type="button" class="btn btn-primary checkout-btn" id="checkout-btn" data-id=${bookId}  data-booklog=${bookLogId}>CHECK OUT</button>
+          <button type="button" class="btn btn-primary adopt-btn" id="adopt-btn" data-id=${bookId}  data-booklog=${bookLogId}>ADOPT</button> <br><br><br>
+          <img class="img-fluid" src='assets/question-reading.gif' alt='A hand flips through the same blank page with question mark from a book over and over again'>
+          <p>No, I'm probably returning this book soon.</p>
+          <button type="button" class="btn btn-primary checkout-btn checkout-fetch-btn" id="checkout-btn" data-id=${bookId}  data-booklog=${bookLogId}>CHECK OUT</button>
         </div>
         <div class="modal-footer text-center">
         </div>
@@ -56,17 +58,17 @@ const displayAdoptModal = e => {
     `<div class="modal-content">
         <div class="modal-header">
           <div class="col-6">
-            <h5 class="modal-title">Thank you for adopting this book!</h5>
+            <h5 class="modal-title">Enjoy your new book!</h5>
           </div>
           <div class="col-6">
             <button type="button" class="btn-close d-block d-sm-block d-md-none float-right" data-dismiss="modal" aria-label="Close"></button>
           </div>
         </div>
         <div class="modal-body text-center">
-          <p>Enjoy!</p>
+         <img class="img-fluid" src='assets/jack-black-book.gif' width ="100%" alt='Jack Black opens a book and rays of bright light come out of it'>
         </div>
         <div class="modal-footer text-center">
-          <button type="button" class="btn btn-primary" id="thanks-btn">BACK TO MAP</button>
+          <button type="button" class="btn btn-primary" id="thanks-btn">THANKS!</button>
         </div>
       </div>
     </div>

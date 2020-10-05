@@ -19,7 +19,7 @@ function initMap() {
 
     var icon = {
         url: './assets/library_icon.png', // url
-        scaledSize: new google.maps.Size(50, 75), // scaled size
+        scaledSize: new google.maps.Size(45, 75), // scaled size
         origin: new google.maps.Point(0,0), // origin
         anchor: new google.maps.Point(0, 0) // anchor
     };
@@ -27,6 +27,7 @@ function initMap() {
 
   const geoCodeAdresses = (libraries) => {
     for(let element in libraries){
+      console.log(element)
         const {id, location, name} = libraries[element]
         obj = {
             id: id, 
@@ -40,6 +41,8 @@ function initMap() {
       }        
         for (let i = 0; i < libObj.length; ++i) {
           geocoder.geocode( { 'address': libObj[i].location}, function(results, status) {
+            console.log(libObj[i])
+            console.log('HELLO SECOND FOR LOOP')
             if (status == 'OK') {
               map.setCenter(results[0].geometry.location);
                   const marker = new google.maps.Marker({
@@ -54,7 +57,6 @@ function initMap() {
             addClickListeners(marker);
 
             } else {
-              debugger
               alert('Geocode was not successful for the following reason: ' + status);
             }
       
@@ -286,8 +288,8 @@ function initMap() {
   function addClickListeners(marker){
       
     const infowindow = new google.maps.InfoWindow({
-        content: `Little Library name: ${marker.libraryName}
-        Location: ${marker.location}` 
+        content: `<b>Little Library name:</b> ${marker.libraryName}<br><br>
+        <b>Location:</b> ${marker.location}` 
         ,
       });
       
