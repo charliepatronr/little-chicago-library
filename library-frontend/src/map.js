@@ -19,7 +19,7 @@ function initMap() {
 
     var icon = {
         url: './assets/library_icon.png', // url
-        scaledSize: new google.maps.Size(50, 75), // scaled size
+        scaledSize: new google.maps.Size(45, 75), // scaled size
         origin: new google.maps.Point(0,0), // origin
         anchor: new google.maps.Point(0, 0) // anchor
     };
@@ -288,8 +288,8 @@ function initMap() {
   function addClickListeners(marker){
       
     const infowindow = new google.maps.InfoWindow({
-        content: `Little Library name: ${marker.libraryName}
-        Location: ${marker.location}` 
+        content: `<b>Little Library name:</b> ${marker.libraryName}<br><br>
+        <b>Location:</b> ${marker.location}` 
         ,
       });
       
