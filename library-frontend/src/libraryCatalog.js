@@ -43,19 +43,19 @@ const landingPageListeners = () => {
 const addListeners = () => {
     let container = document.getElementById('main-individual-library')
     container.addEventListener('click', (e) => {
-        if(e.target.className == 'image-link'){
+        if( e.target.className.includes('image-link') ){
             productModal(e)
         }
         else if (e.target.className ==='library'){
             libraryInfo(e)
         }
-        else if (e.target.className === 'toggle-map'){
+        else if (e.target.className.includes('toggle-map')){
             renderMap(e)
         }
-        else if (e.target.className === 'donate-book'){
+        else if (e.target.className.includes('donate-book') ){
             donateBook(e)
         }
-        else if (e.target.className === 'return-book'){
+        else if (e.target.className.includes('return-book') ){
             returnBook(e)
         }
         else if (e.target.className === 'adopt-book'){
@@ -70,7 +70,7 @@ const addListeners = () => {
 
 const completelibraryListeners = () => {
   completelibraryCatalog.addEventListener('click', e => {
-    if(e.target.className === 'image-link'){
+    if( e.target.className.includes('image-link') ){
         productModal(e)
     }
   });
@@ -130,10 +130,9 @@ const fetchEntireCatalog = () => {
                 let bookLog = library.book_logs.find(element => element.book_id === book.id)
                 bookCards += 
                 `<div class="col-6 col-sm-6 col-md-2 available-${bookLog.available} adopted-${bookLog.adopted}">
-                <!-- <a href=""> -->
                 <div class="book-card" data-book-id= '${book.id}' data-library-id= '${library.id}'>
                   <div class="book-cover">
-                    <img class="image-link" src='${book.img_url}' style='width: 152px'><img>
+                    <img class="image-link img-fluid" src='${book.img_url}' style='width: 152px'><img>
                   </div>
                   <div class="book-text-info">
                     <div class="author">
@@ -144,7 +143,6 @@ const fetchEntireCatalog = () => {
                     </div>
                   </div>
                 </div>
-                <!-- </a> -->
               </div>`
             });
         })
@@ -180,17 +178,18 @@ const renderMap = (e) => {
 const renderLibraryInfo = (library) => {
     let libInfo = document.querySelector(".library-info-container")
     let libDiv =
-    `<div class= "library-information" data-id= "${library.id}">
+    `<div class= "library-information text-center" data-id= "${library.id}">
+      <div><h5><b>ABOUT THIS LIBRARY</b></h5></div><br>
         <div class="library-name">
-            <p> Name: ${library.name}</p>
+            <p><b>Name:</b> ${library.name}</p>
         </div>
         <div class= "library-location">
-            <p> Location: ${library.location}</p>
+            <p><b>Location:</b> ${library.location}</p>
         </div>
         <div class= "library-num-of-books">
-            <p>Number of Books: ${library.book_logs.length}</p>
+            <p><b>Number of Books:</b> ${library.book_logs.length}</p>
         </div>
-    </div>`
+    </div><br>`
     libInfo.innerHTML = libDiv
 }
 
@@ -203,7 +202,7 @@ const renderIndivCatalog = (library) => {
        <div class="col-6 col-sm-6 col-md-2 available-${bookLog.available} adopted-${bookLog.adopted}">
         <div class="book-card" data-book-id='${book.id}' data-library-id = '${library.id}'>
             <div class="book-cover">
-                <img src='${book.img_url}' class='image-link'style='width: 152px'><img>
+                <img src='${book.img_url}' class='image-link img-fluid' style='width: 152px'><img>
             </div>
             <div class="book-text-info">
                 <div class="author">
@@ -225,9 +224,16 @@ const renderIndivCatalog = (library) => {
 const renderButtons = (library) => {
     let buttonWrapper = document.querySelector(".button-wrapper")
     let buttons = 
-    `<button class='donate-book' data-id=${library.id}>Donate</button>
-    <button class='return-book' data-id=${library.id}>Return book</button>
-    <button class='toggle-map'>Return to Map</button>`
+    `<div class="row gy-3">
+    <div class="col-sm-6 col-md-4">
+    <button class='btn btn-primary donate-book btn-block' data-id=${library.id}>Donate 📔</button>
+    </div>
+    <div class="col-sm-6 col-md-4">
+    <button class='btn btn-primary return-book btn-block' data-id=${library.id}>Return 📔</button>
+    </div>
+    <div class="col-sm-6 col-md-4">
+    <button class='btn btn-primary toggle-map btn-block'>Map  🗺</button>
+    </div></div>`
     buttonWrapper.innerHTML = buttons
 }
 
@@ -239,8 +245,8 @@ const customizeModal = (e, bookId) =>{
         `<div class="modal-content">
         <div class="modal-header">
           <div class="col-6">
-            <h5 class="modal-title" id="exampleModalLabel">${book.title}</h5>
-            <h5 class="modal-author" id="exampleModalLabel">${book.author}</h5>
+            <h5 class="modal-author" id="modal-author"><a href="">${book.author}</a></h5>
+            <h5 class="modal-title" id="modal-title">${book.title}</h5>
           </div>
           <div class="col-6">
             <button type="button" class="btn-close d-block d-sm-block d-md-none float-right" data-dismiss="modal" aria-label="Close"></button>
@@ -253,13 +259,13 @@ const customizeModal = (e, bookId) =>{
         </div>
         <div class="modal-footer text-center">
           <div class="col-12">
-            <button type="button" class="btn btn-primary adopt-book" data-booklog="${book.book_logs[0].id}" data-id="${book.id}">ADOPT</button>
+            <button type="button" class="btn btn-primary adopt-book btn-block" data-booklog="${book.book_logs[0].id}" data-id="${book.id}">ADOPT</button>
           </div>
           <div class="col-12">
-            <button type="button" class="btn btn-primary check-out-book"  data-booklog="${book.book_logs[0].id}" data-id="${book.id}">CHECK OUT</button>
+            <button type="button" class="btn btn-primary check-out-book btn-block"  data-booklog="${book.book_logs[0].id}" data-id="${book.id}">CHECK OUT</button>
           </div>
           <div class="col-12">
-            <button type="button" class="btn btn-primary edit-book" data-id="${book.id}">EDIT</button>
+            <button type="button" class="btn btn-primary edit-book btn-block" data-id="${book.id}">EDIT</button>
           </div>
         </div>
       </div>`
