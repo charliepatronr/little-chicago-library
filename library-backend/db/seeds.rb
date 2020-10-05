@@ -17,15 +17,20 @@ end
 librariesLatLong = [{lat: 41.96819 , long: -87.67666 }, {lat: 41.97013 , long:-87.67136}, {lat:41.97587 , long:-87.67134}, {lat:41.98189 , long:-87.67109}, {lat:41.979329 , long:-87.66644
 }, {lat:41.97776 , long:-87.66443}, {lat:41.97721 , long:-87.6639}, {lat:41.97602 , long:-87.65759}]
 
+# librariesLocations = ['McPherson Elementary School
+# 4728 N. Wolcott Avenue Chicago IL 60640', 
+# '4842 N. Paulina St. Chicago IL 60640', 
+# '1643 W Foster Chicago IL 60640', 
+# '1630 W Catalpa Avenue Chicago IL 60640', 
+# '1438 W Summerdale Avenue Chicago IL 60640', 
+# '5251 n Glenwood Chicago IL 60640', 
+# '5230 North Wayne Avenue Chicago IL 60640',
+# '5125 N Winthrop Ave Chicago IL 60640'
+# ]
+
 librariesLocations = ['McPherson Elementary School
 4728 N. Wolcott Avenue Chicago IL 60640', 
-'4842 N. Paulina St. Chicago IL 60640', 
-'1643 W Foster Chicago IL 60640', 
-'1630 W Catalpa Avenue Chicago IL 60640', 
-'1438 W Summerdale Avenue Chicago IL 60640', 
-'5251 n Glenwood Chicago IL 60640', 
-'5230 North Wayne Avenue Chicago IL 60640',
-'5125 N Winthrop Ave Chicago IL 60640'
+'4842 N. Paulina St. Chicago IL 60640'
 ]
 
 librariesLocations.each do |lib|
