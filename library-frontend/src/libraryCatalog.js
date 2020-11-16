@@ -51,7 +51,7 @@ const addListeners = () => {
             renderMap(e)
         }
         else if (e.target.className === 'donate-book'){
-            donateBook(e)
+            renderDonationForm(e)
         }
         else if (e.target.className === 'return-book'){
             returnBook(e)
@@ -208,9 +208,10 @@ const renderIndivCatalog = (library) => {
 }
 
 
-const renderDonationForm = (e) => {
+// const renderDonationForm = (e) => {
+    
 
-}
+// }
 
 const renderButtons = (library) => {
     let buttonWrapper = document.querySelector(".button-wrapper")
@@ -281,7 +282,7 @@ const libraryInfo = (e) => {
 // EVERY TIME I GO FROM THE MAP PAGE TO THE LIBRARY THE BUTTONS CONSOLE LOG MULTIPLIES WHY? IS IT BECAUSE OF EVENT LISTENERS???
 const donateBook = (e) => {
     console.log(e.target, 'entered event')
-    renderDonationForm();
+    // renderDonationForm(e);
 }
 
 
@@ -352,7 +353,6 @@ const main = () =>{
     fetchEntireCatalog();
     modalListeners();
     addListeners();
-
 }
 
 
