@@ -12,6 +12,6 @@ Ruby on Rails back-end, Javascript front-end, GoogleMaps API, Bootstrap 5/CSS im
 5. rails s
 6. navigate to localhost:3000
 ### **Creators:**
-**Natalia Galán** - hi@nataliagalan.me
-**Austin Oie** - austinoie@gmail.com
-**Juan Carlos Patrón** - charliepatronr@gmail.com
+**Natalia Galán** - hi@nataliagalan.me  
+**Austin Oie** - austinoie@gmail.com  
+**Juan Carlos Patrón** - charliepatronr@gmail.com  
