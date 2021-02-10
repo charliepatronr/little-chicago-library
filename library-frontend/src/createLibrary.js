@@ -27,7 +27,6 @@ const renderNewLibraryForm = (e) => {
     modal.innerHTML = modalContent
     myModal.toggle()
     
- 
 
 }
 

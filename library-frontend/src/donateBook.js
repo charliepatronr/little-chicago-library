@@ -13,24 +13,24 @@ function renderDonationForm(e) {
             <div class="modal-body text-center">
             <!-- FORM BEGINS HERE -->
             <div class="mb-3">
-            <label for="title" class="form-label">Book Title</label>
+            <label for="title" class="form-label">BOOK TITLE</label>
             <input type="text" class="form-control" id="title" value=" ">
             </div>
             <div class="mb-3">
-            <label for="author" class="form-label">Author</label>
+            <label for="author" class="form-label">AUTHOR</label>
             <input type="text" class="form-control" id="author" value=" ">
             </div>
             <div class="mb-3">
-            <label for="genre" class="form-label">Genre</label>
+            <label for="genre" class="form-label">GENRE</label>
             <input type="text" class="form-control" id="genre" placeholder="Genre" value=" ">
             </div>
             <div class="mb-3">
-            <label for="img_url" class="form-label">img_url</label>
+            <label for="img_url" class="form-label">IMAGE URL</label>
             <input type="text" class="form-control" id="img_url" value=" ">
             </div>
             <div class="mb-3">
-            <label for="description" class="form-label">Thoughts on this book?</label>
-            <textarea class="form-control" id="description" placeholder="About this Book" rows="3"></textarea>
+            <label for="description" class="form-label">THOUGHTS ON THIS BOOK?</label>
+            <textarea class="form-control" id="description" rows="3"></textarea>
             </div>
             <!-- FORM ENDS HERE -->
             </div>

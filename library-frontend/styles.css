@@ -21,7 +21,7 @@ body {
 }
 
 .available-false img {
-  filter: grayscale(100%);
+  filter: contrast(10%);
 }
 
 .adopted-true {
